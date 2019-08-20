@@ -799,3 +799,24 @@ register(
     max_episode_steps=1000,
     reward_threshold=100,
 )
+
+register(
+    id='MultiAgentEnv-v1',
+    entry_point='gym.envs.multiagent:MidMultiEnv',
+    max_episode_steps=1000,
+    reward_threshold=200,
+)
+
+register(
+    id='MultiAgentEnv-v2',
+    entry_point='gym.envs.multiagent:SimpleCarMultiEnv',
+    max_episode_steps=1000,
+    reward_threshold=300,
+)
+
+register(
+    id='MultiAgentEnv-v3',
+    entry_point='gym.envs.multiagent:TruckExcvtrMultiEnv',
+    max_episode_steps=300,
+    reward_threshold=300,
+)
