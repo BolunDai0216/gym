@@ -20,7 +20,7 @@ register(
 register(
     id='ReversedAddition-v0',
     entry_point='gym.envs.algorithmic:ReversedAdditionEnv',
-    kwargs={'rows' : 2},
+    kwargs={'rows': 2},
     max_episode_steps=200,
     reward_threshold=25.0,
 )
@@ -28,7 +28,7 @@ register(
 register(
     id='ReversedAddition3-v0',
     entry_point='gym.envs.algorithmic:ReversedAdditionEnv',
-    kwargs={'rows' : 3},
+    kwargs={'rows': 3},
     max_episode_steps=200,
     reward_threshold=25.0,
 )
@@ -49,6 +49,21 @@ register(
 
 # Classic
 # ----------------------------------------
+
+register(
+    id='MiningEnv-v0',
+    entry_point='gym.envs.classic_control:MiningEnv',
+    reward_threshold=1.0,
+    nondeterministic=False,
+)
+
+register(
+    id='MiningEnv-v1',
+    entry_point='gym.envs.classic_control:SingleMiningEnv',
+    reward_threshold=1.0,
+    nondeterministic=False,
+)
+
 
 register(
     id='CartPole-v0',
@@ -89,6 +104,69 @@ register(
     entry_point='gym.envs.classic_control:AcrobotEnv',
     reward_threshold=-100.0,
     max_episode_steps=500,
+)
+
+register(
+    id='Truck-v0',
+    entry_point='gym.envs.classic_control:TruckSimEnv',
+    reward_threshold=7000,
+    max_episode_steps=300,
+)
+
+register(
+    id='Truck-v1',
+    entry_point='gym.envs.classic_control:TruckSimNoAngEnv',
+    reward_threshold=7000,
+    max_episode_steps=300,
+)
+
+register(
+    id='Truck-v2',
+    entry_point='gym.envs.classic_control:TruckSimVelEnv',
+    reward_threshold=7000,
+    max_episode_steps=400,
+)
+
+register(
+    id='Truck-v3',
+    entry_point='gym.envs.classic_control:TruckSimVelHalfEnv',
+    reward_threshold=10,
+    max_episode_steps=450,
+)
+
+register(
+    id='Truck-v4',
+    entry_point='gym.envs.classic_control:TruckSimVelHalfRandInitEnv',
+    reward_threshold=10,
+    max_episode_steps=450,
+)
+
+register(
+    id='Truck-v5',
+    entry_point='gym.envs.classic_control:TruckSimVelHalfOptInitEnv',
+    reward_threshold=10,
+    max_episode_steps=450,
+)
+
+register(
+    id='Truck-v6',
+    entry_point='gym.envs.classic_control:TruckSimVelHalfBoxInitEnv',
+    reward_threshold=10,
+    max_episode_steps=450,
+)
+
+register(
+    id='Truck-v7',
+    entry_point='gym.envs.classic_control:TruckSimVelHalfDisplayEnv',
+    reward_threshold=10,
+    max_episode_steps=600,
+)
+
+register(
+    id='Excvtr-v0',
+    entry_point='gym.envs.classic_control:ExcvtrSimEnv',
+    reward_threshold=10,
+    max_episode_steps=400,
 )
 
 # Box2d
@@ -150,17 +228,17 @@ register(
 register(
     id='FrozenLake-v0',
     entry_point='gym.envs.toy_text:FrozenLakeEnv',
-    kwargs={'map_name' : '4x4'},
+    kwargs={'map_name': '4x4'},
     max_episode_steps=100,
-    reward_threshold=0.78, # optimum = .8196
+    reward_threshold=0.78,  # optimum = .8196
 )
 
 register(
     id='FrozenLake8x8-v0',
     entry_point='gym.envs.toy_text:FrozenLakeEnv',
-    kwargs={'map_name' : '8x8'},
+    kwargs={'map_name': '8x8'},
     max_episode_steps=200,
-    reward_threshold=0.99, # optimum = 1
+    reward_threshold=0.99,  # optimum = 1
 )
 
 register(
@@ -183,7 +261,7 @@ register(
 register(
     id='Taxi-v2',
     entry_point='gym.envs.toy_text:TaxiEnv',
-    reward_threshold=8, # optimum = 8.46
+    reward_threshold=8,  # optimum = 8.46
     max_episode_steps=200,
 )
 
@@ -197,6 +275,12 @@ register(
     id='HotterColder-v0',
     entry_point='gym.envs.toy_text:HotterColder',
     max_episode_steps=200,
+)
+
+register(
+    id='SimpleEnv-v0',
+    entry_point='gym.envs.toy_text:SimpleEnv',
+    max_episode_steps=100,
 )
 
 # Mujoco
@@ -335,9 +419,11 @@ register(
 # Robotics
 # ----------------------------------------
 
+
 def _merge(a, b):
     a.update(b)
     return a
+
 
 for reward_type in ['sparse', 'dense']:
     suffix = 'Dense' if reward_type == 'dense' else ''
@@ -392,14 +478,16 @@ for reward_type in ['sparse', 'dense']:
     register(
         id='HandManipulateBlockRotateZTouchSensors{}-v0'.format(suffix),
         entry_point='gym.envs.robotics:HandBlockTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'z', 'touch_get_obs': 'boolean'}, kwargs),
+        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'z',
+                       'touch_get_obs': 'boolean'}, kwargs),
         max_episode_steps=100,
     )
 
     register(
         id='HandManipulateBlockRotateZTouchSensors{}-v1'.format(suffix),
         entry_point='gym.envs.robotics:HandBlockTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'z', 'touch_get_obs': 'sensordata'}, kwargs),
+        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'z',
+                       'touch_get_obs': 'sensordata'}, kwargs),
         max_episode_steps=100,
     )
 
@@ -413,14 +501,16 @@ for reward_type in ['sparse', 'dense']:
     register(
         id='HandManipulateBlockRotateParallelTouchSensors{}-v0'.format(suffix),
         entry_point='gym.envs.robotics:HandBlockTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'parallel', 'touch_get_obs': 'boolean'}, kwargs),
+        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'parallel',
+                       'touch_get_obs': 'boolean'}, kwargs),
         max_episode_steps=100,
     )
 
     register(
         id='HandManipulateBlockRotateParallelTouchSensors{}-v1'.format(suffix),
         entry_point='gym.envs.robotics:HandBlockTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'parallel', 'touch_get_obs': 'sensordata'}, kwargs),
+        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'parallel',
+                       'touch_get_obs': 'sensordata'}, kwargs),
         max_episode_steps=100,
     )
 
@@ -434,14 +524,16 @@ for reward_type in ['sparse', 'dense']:
     register(
         id='HandManipulateBlockRotateXYZTouchSensors{}-v0'.format(suffix),
         entry_point='gym.envs.robotics:HandBlockTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz', 'touch_get_obs': 'boolean'}, kwargs),
+        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'boolean'}, kwargs),
         max_episode_steps=100,
     )
 
     register(
         id='HandManipulateBlockRotateXYZTouchSensors{}-v1'.format(suffix),
         entry_point='gym.envs.robotics:HandBlockTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz', 'touch_get_obs': 'sensordata'}, kwargs),
+        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'sensordata'}, kwargs),
         max_episode_steps=100,
     )
 
@@ -463,14 +555,16 @@ for reward_type in ['sparse', 'dense']:
     register(
         id='HandManipulateBlockTouchSensors{}-v0'.format(suffix),
         entry_point='gym.envs.robotics:HandBlockTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz', 'touch_get_obs': 'boolean'}, kwargs),
+        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'boolean'}, kwargs),
         max_episode_steps=100,
     )
 
     register(
         id='HandManipulateBlockTouchSensors{}-v1'.format(suffix),
         entry_point='gym.envs.robotics:HandBlockTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz', 'touch_get_obs': 'sensordata'}, kwargs),
+        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'sensordata'}, kwargs),
         max_episode_steps=100,
     )
 
@@ -484,14 +578,16 @@ for reward_type in ['sparse', 'dense']:
     register(
         id='HandManipulateEggRotateTouchSensors{}-v0'.format(suffix),
         entry_point='gym.envs.robotics:HandEggTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz', 'touch_get_obs': 'boolean'}, kwargs),
+        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'boolean'}, kwargs),
         max_episode_steps=100,
     )
 
     register(
         id='HandManipulateEggRotateTouchSensors{}-v1'.format(suffix),
         entry_point='gym.envs.robotics:HandEggTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz', 'touch_get_obs': 'sensordata'}, kwargs),
+        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'sensordata'}, kwargs),
         max_episode_steps=100,
     )
 
@@ -513,14 +609,16 @@ for reward_type in ['sparse', 'dense']:
     register(
         id='HandManipulateEggTouchSensors{}-v0'.format(suffix),
         entry_point='gym.envs.robotics:HandEggTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz', 'touch_get_obs': 'boolean'}, kwargs),
+        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'boolean'}, kwargs),
         max_episode_steps=100,
     )
 
     register(
         id='HandManipulateEggTouchSensors{}-v1'.format(suffix),
         entry_point='gym.envs.robotics:HandEggTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz', 'touch_get_obs': 'sensordata'}, kwargs),
+        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'sensordata'}, kwargs),
         max_episode_steps=100,
     )
 
@@ -534,14 +632,16 @@ for reward_type in ['sparse', 'dense']:
     register(
         id='HandManipulatePenRotateTouchSensors{}-v0'.format(suffix),
         entry_point='gym.envs.robotics:HandPenTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz', 'touch_get_obs': 'boolean'}, kwargs),
+        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'boolean'}, kwargs),
         max_episode_steps=100,
     )
 
     register(
         id='HandManipulatePenRotateTouchSensors{}-v1'.format(suffix),
         entry_point='gym.envs.robotics:HandPenTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz', 'touch_get_obs': 'sensordata'}, kwargs),
+        kwargs=_merge({'target_position': 'ignore', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'sensordata'}, kwargs),
         max_episode_steps=100,
     )
 
@@ -563,14 +663,16 @@ for reward_type in ['sparse', 'dense']:
     register(
         id='HandManipulatePenTouchSensors{}-v0'.format(suffix),
         entry_point='gym.envs.robotics:HandPenTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz', 'touch_get_obs': 'boolean'}, kwargs),
+        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'boolean'}, kwargs),
         max_episode_steps=100,
     )
 
     register(
         id='HandManipulatePenTouchSensors{}-v1'.format(suffix),
         entry_point='gym.envs.robotics:HandPenTouchSensorsEnv',
-        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz', 'touch_get_obs': 'sensordata'}, kwargs),
+        kwargs=_merge({'target_position': 'random', 'target_rotation': 'xyz',
+                       'touch_get_obs': 'sensordata'}, kwargs),
         max_episode_steps=100,
     )
 
@@ -579,14 +681,14 @@ for reward_type in ['sparse', 'dense']:
 
 # # print ', '.join(["'{}'".format(name.split('.')[0]) for name in atari_py.list_games()])
 for game in ['adventure', 'air_raid', 'alien', 'amidar', 'assault', 'asterix', 'asteroids', 'atlantis',
-    'bank_heist', 'battle_zone', 'beam_rider', 'berzerk', 'bowling', 'boxing', 'breakout', 'carnival',
-    'centipede', 'chopper_command', 'crazy_climber', 'defender', 'demon_attack', 'double_dunk',
-    'elevator_action', 'enduro', 'fishing_derby', 'freeway', 'frostbite', 'gopher', 'gravitar',
-    'hero', 'ice_hockey', 'jamesbond', 'journey_escape', 'kangaroo', 'krull', 'kung_fu_master',
-    'montezuma_revenge', 'ms_pacman', 'name_this_game', 'phoenix', 'pitfall', 'pong', 'pooyan',
-    'private_eye', 'qbert', 'riverraid', 'road_runner', 'robotank', 'seaquest', 'skiing',
-    'solaris', 'space_invaders', 'star_gunner', 'tennis', 'time_pilot', 'tutankham', 'up_n_down',
-    'venture', 'video_pinball', 'wizard_of_wor', 'yars_revenge', 'zaxxon']:
+             'bank_heist', 'battle_zone', 'beam_rider', 'berzerk', 'bowling', 'boxing', 'breakout', 'carnival',
+             'centipede', 'chopper_command', 'crazy_climber', 'defender', 'demon_attack', 'double_dunk',
+             'elevator_action', 'enduro', 'fishing_derby', 'freeway', 'frostbite', 'gopher', 'gravitar',
+             'hero', 'ice_hockey', 'jamesbond', 'journey_escape', 'kangaroo', 'krull', 'kung_fu_master',
+             'montezuma_revenge', 'ms_pacman', 'name_this_game', 'phoenix', 'pitfall', 'pong', 'pooyan',
+             'private_eye', 'qbert', 'riverraid', 'road_runner', 'robotank', 'seaquest', 'skiing',
+             'solaris', 'space_invaders', 'star_gunner', 'tennis', 'time_pilot', 'tutankham', 'up_n_down',
+             'venture', 'video_pinball', 'wizard_of_wor', 'yars_revenge', 'zaxxon']:
     for obs_type in ['image', 'ram']:
         # space_invaders should yield SpaceInvaders-v0 and SpaceInvaders-ram-v0
         name = ''.join([g.capitalize() for g in game.split('_')])
@@ -627,7 +729,8 @@ for game in ['adventure', 'air_raid', 'alien', 'amidar', 'assault', 'asterix', '
         register(
             id='{}Deterministic-v0'.format(name),
             entry_point='gym.envs.atari:AtariEnv',
-            kwargs={'game': game, 'obs_type': obs_type, 'frameskip': frameskip, 'repeat_action_probability': 0.25},
+            kwargs={'game': game, 'obs_type': obs_type,
+                    'frameskip': frameskip, 'repeat_action_probability': 0.25},
             max_episode_steps=100000,
             nondeterministic=nondeterministic,
         )
@@ -643,7 +746,8 @@ for game in ['adventure', 'air_raid', 'alien', 'amidar', 'assault', 'asterix', '
         register(
             id='{}NoFrameskip-v0'.format(name),
             entry_point='gym.envs.atari:AtariEnv',
-            kwargs={'game': game, 'obs_type': obs_type, 'frameskip': 1, 'repeat_action_probability': 0.25}, # A frameskip of 1 means we get every frame
+            kwargs={'game': game, 'obs_type': obs_type, 'frameskip': 1,
+                    'repeat_action_probability': 0.25},  # A frameskip of 1 means we get every frame
             max_episode_steps=frameskip * 100000,
             nondeterministic=nondeterministic,
         )
@@ -653,7 +757,8 @@ for game in ['adventure', 'air_raid', 'alien', 'amidar', 'assault', 'asterix', '
         register(
             id='{}NoFrameskip-v4'.format(name),
             entry_point='gym.envs.atari:AtariEnv',
-            kwargs={'game': game, 'obs_type': obs_type, 'frameskip': 1}, # A frameskip of 1 means we get every frame
+            # A frameskip of 1 means we get every frame
+            kwargs={'game': game, 'obs_type': obs_type, 'frameskip': 1},
             max_episode_steps=frameskip * 100000,
             nondeterministic=nondeterministic,
         )
@@ -666,20 +771,31 @@ register(
     id='CubeCrash-v0',
     entry_point='gym.envs.unittest:CubeCrash',
     reward_threshold=0.9,
-    )
+)
 register(
     id='CubeCrashSparse-v0',
     entry_point='gym.envs.unittest:CubeCrashSparse',
     reward_threshold=0.9,
-    )
+)
 register(
     id='CubeCrashScreenBecomesBlack-v0',
     entry_point='gym.envs.unittest:CubeCrashScreenBecomesBlack',
     reward_threshold=0.9,
-    )
+)
 
 register(
     id='MemorizeDigits-v0',
     entry_point='gym.envs.unittest:MemorizeDigits',
     reward_threshold=20,
-    )
+)
+
+
+# Multi-Agent
+# -----------
+
+register(
+    id='MultiAgentEnv-v0',
+    entry_point='gym.envs.multiagent:SimpleMultiEnv',
+    max_episode_steps=1000,
+    reward_threshold=100,
+)

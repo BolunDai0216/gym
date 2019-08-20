@@ -1,25 +1,28 @@
+"""An observation wrapper that filters dictionary observations by its keys."""
+
 import copy
 
 from gym import spaces
 from gym import ObservationWrapper
 
 
-class FilterObservation(ObservationWrapper):
-    """Filter dictionary observations by their keys.
-    
-    Args:
-        env: The environment to wrap.
-        filter_keys: List of keys to be included in the observations.
-
-    Raises:
-        ValueError: If observation keys in not instance of None or
-            iterable.
-        ValueError: If any of the `filter_keys` are not included in
-            the original `env`'s observation space
-    
-    """
+class FilterObservationWrapper(ObservationWrapper):
+    """Filter dictionary observations by their keys."""
     def __init__(self, env, filter_keys=None):
-        super(FilterObservation, self).__init__(env)
+        """Initializes a new observation filter Wrapper.
+
+        Args:
+            env: The environment to wrap.
+            filter_keys: List of keys to be included in the observations.
+
+        Raises:
+            ValueError: If observation keys in not instance of None or
+                iterable.
+            ValueError: If any of the `filter_keys` are not included in
+                the original `env`'s observation space
+        """
+
+        super(FilterObservationWrapper, self).__init__(env)
 
         wrapped_observation_space = env.observation_space
         assert isinstance(wrapped_observation_space, spaces.Dict), (

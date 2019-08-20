@@ -1,9 +1,12 @@
+"""Tests for the filter observation wrapper."""
+
+
 import pytest
 import numpy as np
 
 import gym
 from gym import spaces
-from gym.wrappers.filter_observation import FilterObservation
+from gym.wrappers.filter_observation import FilterObservationWrapper
 
 
 class FakeEnvironment(gym.Env):
@@ -46,7 +49,7 @@ ERROR_TEST_CASES = (
 )
 
 
-class TestFilterObservation(object):
+class TestFilterObservationWrapper(object):
     @pytest.mark.parametrize("observation_keys,filter_keys",
                              FILTER_OBSERVATION_TEST_CASES)
     def test_filter_observation(self, observation_keys, filter_keys):
@@ -56,7 +59,7 @@ class TestFilterObservation(object):
         observation_space = env.observation_space
         assert isinstance(observation_space, spaces.Dict)
 
-        wrapped_env = FilterObservation(env, filter_keys=filter_keys)
+        wrapped_env = FilterObservationWrapper(env, filter_keys=filter_keys)
 
         assert isinstance(wrapped_env.observation_space, spaces.Dict)
 
@@ -82,4 +85,4 @@ class TestFilterObservation(object):
         ValueError
 
         with pytest.raises(error_type, match=error_match):
-            FilterObservation(env, filter_keys=filter_keys)
+            FilterObservationWrapper(env, filter_keys=filter_keys)

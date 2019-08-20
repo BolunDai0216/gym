@@ -3,4 +3,15 @@ from gym.envs.classic_control.mountain_car import MountainCarEnv
 from gym.envs.classic_control.continuous_mountain_car import Continuous_MountainCarEnv
 from gym.envs.classic_control.pendulum import PendulumEnv
 from gym.envs.classic_control.acrobot import AcrobotEnv
-
+from gym.envs.classic_control.mining_env import MiningEnv
+from gym.envs.classic_control.single_mining_env import SingleMiningEnv
+from gym.envs.classic_control.truck_dynamics import *
+from gym.envs.classic_control.truck_sim_without_ang import TruckSimNoAngEnv
+from gym.envs.classic_control.truck_sim_with_vel import TruckSimVelEnv
+from gym.envs.classic_control.truck_sim import TruckSimEnv
+from gym.envs.classic_control.truck_sim_ang_vel_v0 import TruckSimVelHalfEnv
+from gym.envs.classic_control.truck_sim_ang_vel_v1 import TruckSimVelHalfRandInitEnv
+from gym.envs.classic_control.excvtr_sim import ExcvtrSimEnv
+from gym.envs.classic_control.truck_sim_with_optimal_init import TruckSimVelHalfOptInitEnv
+from gym.envs.classic_control.truck_sim_with_box_init import TruckSimVelHalfBoxInitEnv
+from gym.envs.classic_control.truck_dumping_display import TruckSimVelHalfDisplayEnv
